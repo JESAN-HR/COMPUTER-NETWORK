@@ -1,0 +1,48 @@
+1..........................
+en
+conf t
+
+int gig0/0
+ip add 192.168.10.1 255.255.255.0
+no shut
+exit
+
+
+int gig0/1
+ip add 192.168.30.1 255.255.255.0
+no shut
+exit
+
+
+ip dhcp pool lan1
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.1
+dns-server 8.8.8.8
+
+
+ip route 192.168.20.0 255.255.255.0 192.168.30.2
+
+
+2...........................
+en
+conf t
+
+int gig0/0
+ip add 192.168.20.1 255.255.255.0
+no shut
+exit
+
+
+int gig0/1
+ip add 192.168.30.2 255.255.255.0
+no shut
+exit
+
+
+
+ip dhcp pool lan1
+network 192.168.20.0 255.255.255.0
+default-router 192.168.20.1
+dns-server 8.8.8.8
+
+ip route 192.168.10.0 255.255.255.0 192.168.30.1

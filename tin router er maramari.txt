@@ -1,0 +1,94 @@
+1..........................
+en
+conf t
+
+int gig0/0
+ip add 192.168.10.1 255.255.255.0
+no shut
+exit
+
+
+int gig0/1
+ip add 192.168.40.1 255.255.255.0
+no shut
+exit
+
+
+int gig0/2
+ip add 192.168.50.1 255.255.255.0
+no shut
+exit
+
+ip route 192.168.20.0 255.255.255.0 192.168.30.2*************example
+ip route 192.168.20.0 255.255.255.0 192.168.40.2
+ip route 192.168.30.0 255.255.255.0 192.168.50.2
+
+ip dhcp pool lan1
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.1
+dns-server 8.8.8.8
+
+
+2..........................
+en
+conf t
+
+int gig0/0
+ip add 192.168.20.1 255.255.255.0
+no shut
+exit
+
+
+int gig0/1
+ip add 192.168.40.2 255.255.255.0
+no shut
+exit
+
+
+int gig0/2
+ip add 192.168.60.1 255.255.255.0
+no shut
+exit
+
+ip route 192.168.20.0 255.255.255.0 192.168.30.2*************example
+ip route 192.168.10.0 255.255.255.0 192.168.40.1
+ip route 192.168.30.0 255.255.255.0 192.168.60.2
+
+ip dhcp pool lan1
+network 192.168.20.0 255.255.255.0
+default-router 192.168.20.1
+dns-server 8.8.8.8
+
+
+
+
+3..........................
+en
+conf t
+
+int gig0/0
+ip add 192.168.30.1 255.255.255.0
+no shut
+exit
+
+
+int gig0/1
+ip add 192.168.50.2 255.255.255.0
+no shut
+exit
+
+
+int gig0/2
+ip add 192.168.60.2 255.255.255.0
+no shut
+exit
+
+ip route 192.168.20.0 255.255.255.0 192.168.30.2*************example
+ip route 192.168.10.0 255.255.255.0 192.168.50.1
+ip route 192.168.20.0 255.255.255.0 192.168.60.1
+
+ip dhcp pool lan1
+network 192.168.30.0 255.255.255.0
+default-router 192.168.30.1
+dns-server 8.8.8.8
+
