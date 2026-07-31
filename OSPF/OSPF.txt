@@ -1,0 +1,98 @@
+Router 1
+------------------------------
+en
+conf t
+
+int gig0/0
+ip add 192.168.10.1 255.255.255.192
+no shut
+exit
+
+int gig0/1
+ip add 192.168.10.201 255.255.255.252
+no shut
+exit
+
+int gig0/2
+ip add 192.168.10.193 255.255.255.252
+no shut
+exit
+
+
+ip dhcp pool lan1
+network 192.168.10.0 255.255.255.192
+default-router 192.168.10.1
+dns-server 8.8.8.8
+
+router ospf 1
+network 192.168.10.0 0.0.0.63 area 0
+network 192.168.10.200 0.0.0.3 area 0
+network 192.168.10.192 0.0.0.3 area 0
+
+
+Router 2
+-------------------------------
+en
+conf t
+
+
+int gig0/1
+ip add 192.168.10.65 255.255.255.192
+no shut
+exit
+
+
+int gig0/0
+ip add 192.168.10.202 255.255.255.252
+no shut 
+exit
+
+int gig0/2
+ip add 192.168.10.197 255.255.255.252
+no shut
+exit
+
+ip dhcp pool lan1
+network 192.168.10.64 255.255.255.192
+default-router 192.168.10.65
+dns-server 8.8.8.8
+
+
+router ospf 1
+network 192.168.10.64 0.0.0.63 area 0
+network 192.168.10.196 0.0.0.3 area 0
+network 192.168.10.200 0.0.0.3 area 0
+
+
+Router 3
+---------------------------------------
+en
+conf t
+
+
+int gig0/1
+ip add 192.168.10.129 255.255.255.192
+no shut
+exit
+
+
+int gig0/0
+ip add 192.168.10.194 255.255.255.252
+no shut 
+exit
+
+int gig0/2
+ip add 192.168.10.198 255.255.255.252
+no shut
+exit
+
+ip dhcp pool lan1
+network 192.168.10.128 255.255.255.192
+default-router 192.168.10.129
+dns-server 8.8.8.8
+
+
+router ospf 1
+network 192.168.10.128 0.0.0.63 area 0
+network 192.168.10.196 0.0.0.3 area 0
+network 192.168.10.192 0.0.0.3 area 0
