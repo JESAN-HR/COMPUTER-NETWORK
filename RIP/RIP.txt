@@ -1,0 +1,95 @@
+RIP
+---------------------------
+
+ROUTER 1
+---------------------------
+
+en
+conf t
+
+int gig0/0
+ip add 192.168.10.1 255.255.255.224
+no shut
+
+int gig0/1
+ip add 192.168.10.65 255.255.255.252
+no shut
+
+ip dhcp pool lan1
+network 192.168.10.0 255.255.255.224
+default-router 192.168.10.1
+
+
+ROUTER 2
+------------------------
+
+en 
+conf t
+
+
+int gig0/0
+ip add 192.168.10.33 255.255.255.240
+no shut
+
+
+int gig0/1
+ip add 192.168.10.66 255.255.255.252
+no shut
+
+
+int gig0/2
+ip add 192.168.10.69 255.255.255.252
+no shut
+
+ip dhcp pool lan1
+network 192.168.10.32 255.255.255.240
+default-router 192.168.10.33
+
+
+ROUTER 3
+------------------------
+
+en 
+conf t
+ 
+
+
+int gig0/0
+ip add 192.168.10.41 255.255.255.240
+no shut
+
+int gig0/1
+ip add 192.168.10.70 255.255.255.252
+no shut
+
+ip dhcp pool lan1
+network 192.168.10.40 255.255.255.240
+default-router 192.168.10.41
+
+
+
+
+RIP CONFIGURATION
+------------------------------------
+
+router rip
+version 2
+no auto summary
+network 192.168.10.0
+network 192.168.10.64
+
+router rip
+version 2
+no auto summary
+network 192.168.10.32
+network 192.168.10.64
+network 192.168.10.68
+
+router rip
+version 2
+no auto summary
+network 192.168.10.40
+network 192.168.10.68
+
+
+
